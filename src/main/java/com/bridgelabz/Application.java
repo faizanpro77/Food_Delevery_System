@@ -21,7 +21,8 @@ public class Application {
                 System.out.println("5.TO PRINT ALL ICE CREAM ITEMS");
                 System.out.println("6.TO PRINT ALL PREPARE ITEMS");
                 System.out.println("7.TO PRINT ALL DELIVERED ITEMS");
-                System.out.println("8.TO EXIT");
+                System.out.println("8.ENTER A FOOD ITEM TO DELETE");
+                System.out.println("9.TO EXIT");
                 System.out.println("ENTER YOUR CHOICE");
                 Scanner scanner = new Scanner(System.in);
                 int choice = scanner.nextInt();
@@ -49,12 +50,17 @@ public class Application {
                         foodStore.printDeliveredItem();
                         break;
                     case 8:
+                        String deleteItemFromMenu = scanner.next();
+                        foodStore.deleteItem(deleteItemFromMenu);
+                        break;
+                    case 9:
                         i = 1;
                         break;
+                    default:
+                        System.out.println("invalid choice");
                 }
             }
         }
-
 
     public void AddFoodItem() {
         FoodStore foodStore = FoodStore.getInstance();
@@ -65,8 +71,8 @@ public class Application {
         foodItem.setFoodName(foodName);
 
         System.out.println("Enter the price");
-        String foodPrice = scanner.nextLine();
-        foodItem.setFoodName(foodPrice);
+        float foodPrice = scanner.nextFloat();
+        foodItem.setPrice(foodPrice);
 
         System.out.println("Enter FoodType");
         System.out.println("1.Veg");

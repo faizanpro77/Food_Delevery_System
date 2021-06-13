@@ -1,7 +1,6 @@
 package com.bridgelabz;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class FoodStore {
     public ArrayList<FoodItem> foodStore = new ArrayList<>();
@@ -21,9 +20,18 @@ public class FoodStore {
         foodStore.add(foodItem);
     }
 
-    public void deleteItem(FoodItem foodItem) {
-        foodStore.remove(foodItem);
+    public void deleteItem(String item) {
+        for (int i = 0; i < foodStore.size(); i++) {
+            String matcher = foodStore.get(i).getFoodName();
+            if (matcher.equalsIgnoreCase(item)) {
+                foodStore.remove(i);
+                System.out.println("Item removed Successfuly");
+            } else {
+                System.out.println("Name Not Found");
+            }
+        }
     }
+
 
     public void printStarterItems() {
         for(FoodItem fooditem : foodStore) {
