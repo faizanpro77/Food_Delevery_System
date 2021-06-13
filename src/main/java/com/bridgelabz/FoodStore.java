@@ -5,20 +5,24 @@ import java.util.Scanner;
 
 public class FoodStore {
     public ArrayList<FoodItem> foodStore = new ArrayList<>();
+    static FoodStore instance;
 
-    public void prepare(FoodItem foodItem) {
+    private  FoodStore() {
+    }
+
+    static synchronized FoodStore getInstance() {
+        if(instance == null){
+            instance = new FoodStore();
+        }
+        return instance;
+    }
+
+    public void addItem(FoodItem foodItem) {
         foodStore.add(foodItem);
     }
 
-    public void deliver(FoodItem foodItem) {
+    public void deleteItem(FoodItem foodItem) {
         foodStore.remove(foodItem);
-    }
-
-
-    public void printFood() {
-        for(FoodItem foodItem : foodStore) {
-            System.out.println(foodItem);
-        }
     }
 
     public void printStarterItems() {
@@ -27,10 +31,8 @@ public class FoodStore {
                 System.out.println(fooditem);
             }
         }
-
-
-
     }
+
     public void printMainCourseItems() {
         for (FoodItem fooditem : foodStore) {
             if (fooditem.getFoodCategory() == (FoodCategory.MAIN_COURSE)) {
@@ -39,28 +41,39 @@ public class FoodStore {
         }
     }
 
-    public void printDrink(){
-        for(FoodItem foodItem : foodStore)
-
-    }
-
-    public void createSystemMenu() {
-        System.out.println("1. Print Starters \n " +
-                "2. Print Main Course \n " +
-                "3. Print Drinks \n " +
-                "4. Prepare Food \n " +
-                "5. Deliver Food");
-        System.out.println("Enter your Choice");
-        Scanner sc = new Scanner(System.in);
-        int choice = sc.nextInt();
-        switch (choice) {
-            case 1:
-                printStarterItems();
-                break;
-            case 2:
-                printMainCourseItems();
-            case 3:
-                printDrink()
+    public void printJuiceItem() {
+        for (FoodItem foodItem : foodStore) {
+            if(foodItem.getFoodCategory() == (FoodCategory.JUICE) ) {
+                System.out.println(foodItem);
+            }
         }
     }
+
+    public void printIceCreamItem() {
+        for (FoodItem foodItem : foodStore) {
+            if(foodItem.getFoodCategory() == (FoodCategory.ICE_CREAM)) {
+                System.out.println(foodItem);
+            }
+        }
+    }
+
+    public void printPreparedItem() {
+        for (FoodItem foodItem : foodStore) {
+            System.out.println("prepare item : " + foodItem);
+        }
+    }
+
+    public void printDeliveredItem() {
+        for (FoodItem foodItem : foodStore) {
+            System.out.println(foodItem);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "FoodStore{" +
+                "foodStore=" + foodStore +
+                '}';
+    }
 }
+

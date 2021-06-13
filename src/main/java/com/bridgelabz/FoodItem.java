@@ -1,7 +1,7 @@
 package com.bridgelabz;
 
 enum Taste {
-    SWEET, SPICY, SALTY;
+    SWEET, LESS_SPICY, HIGH_SPICY, SALTY;
 }
 
 enum FoodType {
@@ -9,7 +9,7 @@ enum FoodType {
 }
 
 enum FoodCategory {
-    STARTER, MAIN_COURSE, DRINKS, DESSERT
+    STARTER, MAIN_COURSE, JUICE, ICE_CREAM;
 }
 
 public class FoodItem {
@@ -70,3 +70,4 @@ public class FoodItem {
                 '}';
     }
 }
+

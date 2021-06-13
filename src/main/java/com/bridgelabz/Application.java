@@ -1,56 +1,131 @@
 package com.bridgelabz;
 
+import java.util.Scanner;
+
 public class Application {
 
     public static void main(String[] args) {
-
-        FoodStore foodStore = new FoodStore();
-
         System.out.println("-------------------------Welcome to the food delivery System----------------------------");
+        Application application = new Application();
+        application.createSystemMenu();
+    }
+        public void createSystemMenu() {
+            int i = 0;
+            while (i == 0) {
+                FoodStore foodStore = FoodStore.getInstance();
+                System.out.println("---------------------Food Category's--------------------------");
+                System.out.println("1.ADD FOOD ITEM");
+                System.out.println("2.TO PRINT ALL STARTERS ITEMS");
+                System.out.println("3.TO PRINT ALL MAIN COURSE ITEMS");
+                System.out.println("4.TO PRINT ALL JUICE ITEMS");
+                System.out.println("5.TO PRINT ALL ICE CREAM ITEMS");
+                System.out.println("6.TO PRINT ALL PREPARE ITEMS");
+                System.out.println("7.TO PRINT ALL DELIVERED ITEMS");
+                System.out.println("8.TO EXIT");
+                System.out.println("ENTER YOUR CHOICE");
+                Scanner scanner = new Scanner(System.in);
+                int choice = scanner.nextInt();
+                switch (choice) {
+                    case 1:
+                        Application application = new Application();
+                        application.AddFoodItem();
+                        break;
+                    case 2:
+                        foodStore.printStarterItems();
+                        break;
+                    case 3:
+                        foodStore.printMainCourseItems();
+                        break;
+                    case 4:
+                        foodStore.printJuiceItem();
+                        break;
+                    case 5:
+                        foodStore.printIceCreamItem();
+                        break;
+                    case 6:
+                        foodStore.printPreparedItem();
+                        break;
+                    case 7:
+                        foodStore.printDeliveredItem();
+                        break;
+                    case 8:
+                        i = 1;
+                        break;
+                }
+            }
+        }
 
-        PaneerTikka paneerTikka = new PaneerTikka();
-        paneerTikka.setPrice(150);
-        paneerTikka.setTaste(Taste.SPICY);
 
-        VadaPav vadaPav = new VadaPav();
-        vadaPav.setPrice(20);
-        vadaPav.setTaste(Taste.SALTY);
+    public void AddFoodItem() {
+        FoodStore foodStore = FoodStore.getInstance();
+        Scanner scanner = new Scanner(System.in);
+        FoodItem foodItem = new FoodItem();
+        System.out.println("Enter food name");
+        String foodName = scanner.nextLine();
+        foodItem.setFoodName(foodName);
 
-        TandooriChicken tandooriChicken = new TandooriChicken();
-        tandooriChicken.setPrice(230);
-        tandooriChicken.setTaste(Taste.SPICY);
+        System.out.println("Enter the price");
+        String foodPrice = scanner.nextLine();
+        foodItem.setFoodName(foodPrice);
 
-        DalFry dalFry = new DalFry();
-        dalFry.setPrice(120);
-        dalFry.setTaste(Taste.SWEET);
+        System.out.println("Enter FoodType");
+        System.out.println("1.Veg");
+        System.out.println("2.NonVeg");
+        int choice = scanner.nextInt();
+        switch (choice) {
+           case  1:
+               foodItem.setFoodType(FoodType.VEG);
+               break;
+           case 2:
+               foodItem.setFoodType(FoodType.NON_VEG);
+               break;
+        }
 
-        MasalaPapad masalaPapad = new MasalaPapad();
-        masalaPapad.setPrice(35);
-        masalaPapad.setTaste(Taste.SALTY);
+        System.out.println("Enter the Taste");
+        System.out.println("1.SWEET");
+        System.out.println("2.LESS_SPICY");
+        System.out.println("3.HIGH_SPICY");
+        System.out.println("4.SALTY");
 
-        Drink drink = new Drink();
-        drink.setPrice(100);
-        drink.setTaste(Taste.SWEET);
+        int tasteChoice = scanner.nextInt();
+        switch (tasteChoice)
+        {
+            case 1:
+                foodItem.setTaste(Taste.SWEET);
+                break;
+            case 2:
+                foodItem.setTaste(Taste.LESS_SPICY);
+                break;
+            case 3:
+                foodItem.setTaste(Taste.HIGH_SPICY);
+                break;
+            case 4:
+                foodItem.setTaste(Taste.SALTY);
+        }
 
+        System.out.println("Enter the food category");
+        System.out.println("1.STARTER");
+        System.out.println("2.MAIN_COURSE");
+        System.out.println("3.JUICE");
+        System.out.println("4.ICE_CREAM");
 
-        // adding the foods items
-        foodStore.prepare(paneerTikka);
-        foodStore.prepare(vadaPav);
-        foodStore.prepare(tandooriChicken);
-        foodStore.prepare(dalFry);
-        foodStore.prepare(masalaPapad);
-        foodStore.prepare(drink);
-//        //printing the food items
-//        foodStore.printFood();
-//
-//        // delivering the food items
-//        foodStore.deliver(paneerTikka);
-//
-//        System.out.println("Food Items after Delivery -------------------------------------------------------");
-//
-//        //printing food items after delivering
-//        foodStore.printFood();
-        foodStore.createSystemMenu();
+        int foodCatagoryChoice = scanner.nextInt();
+        switch (foodCatagoryChoice) {
+            case 1:
+                foodItem.setFoodCategory(FoodCategory.STARTER);
+                break;
+            case 2:
+                foodItem.setFoodCategory(FoodCategory.MAIN_COURSE);
+                break;
+            case 3:
+                foodItem.setFoodCategory(FoodCategory.JUICE);
+                break;
+            case 4:
+                foodItem.setFoodCategory(FoodCategory.ICE_CREAM);
+                break;
+        }
+        foodStore.addItem(foodItem);
+        System.out.println(foodStore);
 
     }
 
