@@ -1,9 +1,10 @@
 package com.bridgelabz;
 
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class FoodStore {
-    public ArrayList<FoodItem> foodStore = new ArrayList<>();
+    public Set<FoodItem> foodList = new HashSet<>();
     static FoodStore instance;
 
     private  FoodStore() {
@@ -17,70 +18,47 @@ public class FoodStore {
     }
 
     public void addItem(FoodItem foodItem) {
-        foodStore.add(foodItem);
+        foodList.add(foodItem);
     }
 
     public void deleteItem(String item) {
-        for (int i = 0; i < foodStore.size(); i++) {
-            String matcher = foodStore.get(i).getFoodName();
-            if (matcher.equalsIgnoreCase(item)) {
-                foodStore.remove(i);
-                System.out.println("Item removed Successfuly");
-            } else {
-                System.out.println("Name Not Found");
-            }
-        }
+        foodList.stream().filter(s -> s.getFoodName().equalsIgnoreCase(item)).findFirst().map(s-> {
+                    foodList.remove(s);
+                    return s;
+                });
     }
 
-
     public void printStarterItems() {
-        for(FoodItem fooditem : foodStore) {
-            if(fooditem.getFoodCategory() == (FoodCategory.STARTER)) {
-                System.out.println(fooditem);
-            }
-        }
+           foodList.stream().filter(s1 -> s1.getFoodCategory().equals(FoodCategory.STARTER)).forEach(System.out::println);
     }
 
     public void printMainCourseItems() {
-        for (FoodItem fooditem : foodStore) {
-            if (fooditem.getFoodCategory() == (FoodCategory.MAIN_COURSE)) {
-                System.out.println(fooditem);
-            }
-        }
+        foodList.stream().filter(s -> s.getFoodCategory().equals(FoodCategory.MAIN_COURSE)).forEach(System.out::println);
+
     }
 
     public void printJuiceItem() {
-        for (FoodItem foodItem : foodStore) {
-            if(foodItem.getFoodCategory() == (FoodCategory.JUICE) ) {
-                System.out.println(foodItem);
-            }
-        }
+        foodList.stream().filter(s -> s.getFoodCategory().equals(FoodCategory.JUICE)).forEach(System.out::println);
     }
 
     public void printIceCreamItem() {
-        for (FoodItem foodItem : foodStore) {
-            if(foodItem.getFoodCategory() == (FoodCategory.ICE_CREAM)) {
-                System.out.println(foodItem);
-            }
-        }
+        foodList.stream().filter(s -> s.getFoodCategory().equals(FoodCategory.ICE_CREAM)).forEach(System.out::println);
     }
 
-    public void printPreparedItem() {
-        for (FoodItem foodItem : foodStore) {
+    public void printAllItem() {
+        for (FoodItem foodItem : foodList) {
             System.out.println("prepare item : " + foodItem);
         }
     }
 
     public void printDeliveredItem() {
-        for (FoodItem foodItem : foodStore) {
-            System.out.println(foodItem);
-        }
-    }
+         foodList.stream().forEach(System.out::println);
+}
 
     @Override
     public String toString() {
         return "FoodStore{" +
-                "foodStore=" + foodStore +
+                "foodStore=" + foodList +
                 '}';
     }
 }

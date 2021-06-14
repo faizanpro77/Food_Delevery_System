@@ -3,6 +3,9 @@ package com.bridgelabz;
 import java.util.Scanner;
 
 public class Application {
+    Scanner scanner = new Scanner(System.in);
+    FoodItem foodItem ;
+    FoodStore foodStore = FoodStore.getInstance();
 
     public static void main(String[] args) {
         System.out.println("-------------------------Welcome to the food delivery System----------------------------");
@@ -12,14 +15,13 @@ public class Application {
         public void createSystemMenu() {
             int i = 0;
             while (i == 0) {
-                FoodStore foodStore = FoodStore.getInstance();
                 System.out.println("---------------------Food Category's--------------------------");
                 System.out.println("1.ADD FOOD ITEM");
                 System.out.println("2.TO PRINT ALL STARTERS ITEMS");
                 System.out.println("3.TO PRINT ALL MAIN COURSE ITEMS");
                 System.out.println("4.TO PRINT ALL JUICE ITEMS");
                 System.out.println("5.TO PRINT ALL ICE CREAM ITEMS");
-                System.out.println("6.TO PRINT ALL PREPARE ITEMS");
+                System.out.println("6.TO PRINT ALL ITEMS");
                 System.out.println("7.TO PRINT ALL DELIVERED ITEMS");
                 System.out.println("8.ENTER A FOOD ITEM TO DELETE");
                 System.out.println("9.TO EXIT");
@@ -28,8 +30,7 @@ public class Application {
                 int choice = scanner.nextInt();
                 switch (choice) {
                     case 1:
-                        Application application = new Application();
-                        application.AddFoodItem();
+                        addFoodItem();
                         break;
                     case 2:
                         foodStore.printStarterItems();
@@ -44,7 +45,7 @@ public class Application {
                         foodStore.printIceCreamItem();
                         break;
                     case 6:
-                        foodStore.printPreparedItem();
+                        foodStore.printAllItem();
                         break;
                     case 7:
                         foodStore.printDeliveredItem();
@@ -60,12 +61,12 @@ public class Application {
                         System.out.println("invalid choice");
                 }
             }
+
         }
 
-    public void AddFoodItem() {
-        FoodStore foodStore = FoodStore.getInstance();
+    public void addFoodItem() {
+        foodItem = new FoodItem();
         Scanner scanner = new Scanner(System.in);
-        FoodItem foodItem = new FoodItem();
         System.out.println("Enter food name");
         String foodName = scanner.nextLine();
         foodItem.setFoodName(foodName);
@@ -74,6 +75,16 @@ public class Application {
         float foodPrice = scanner.nextFloat();
         foodItem.setPrice(foodPrice);
 
+        setFoodType();
+        setFoodTaste();
+        setFoodCategory();
+
+        foodStore.addItem(foodItem);
+        System.out.println(foodStore);
+
+    }
+
+    public void setFoodType() {
         System.out.println("Enter FoodType");
         System.out.println("1.Veg");
         System.out.println("2.NonVeg");
@@ -86,7 +97,10 @@ public class Application {
                foodItem.setFoodType(FoodType.NON_VEG);
                break;
         }
+    }
 
+    public void setFoodTaste() {
+        FoodItem foodItem = new FoodItem();
         System.out.println("Enter the Taste");
         System.out.println("1.SWEET");
         System.out.println("2.LESS_SPICY");
@@ -94,8 +108,7 @@ public class Application {
         System.out.println("4.SALTY");
 
         int tasteChoice = scanner.nextInt();
-        switch (tasteChoice)
-        {
+        switch (tasteChoice) {
             case 1:
                 foodItem.setTaste(Taste.SWEET);
                 break;
@@ -108,31 +121,30 @@ public class Application {
             case 4:
                 foodItem.setTaste(Taste.SALTY);
         }
-
-        System.out.println("Enter the food category");
-        System.out.println("1.STARTER");
-        System.out.println("2.MAIN_COURSE");
-        System.out.println("3.JUICE");
-        System.out.println("4.ICE_CREAM");
-
-        int foodCatagoryChoice = scanner.nextInt();
-        switch (foodCatagoryChoice) {
-            case 1:
-                foodItem.setFoodCategory(FoodCategory.STARTER);
-                break;
-            case 2:
-                foodItem.setFoodCategory(FoodCategory.MAIN_COURSE);
-                break;
-            case 3:
-                foodItem.setFoodCategory(FoodCategory.JUICE);
-                break;
-            case 4:
-                foodItem.setFoodCategory(FoodCategory.ICE_CREAM);
-                break;
-        }
-        foodStore.addItem(foodItem);
-        System.out.println(foodStore);
-
     }
 
+        public void setFoodCategory() {
+
+            System.out.println("Enter the food category");
+            System.out.println("1.STARTER");
+            System.out.println("2.MAIN_COURSE");
+            System.out.println("3.JUICE");
+            System.out.println("4.ICE_CREAM");
+
+            int foodCatagoryChoice = scanner.nextInt();
+            switch (foodCatagoryChoice) {
+                case 1:
+                    foodItem.setFoodCategory(FoodCategory.STARTER);
+                    break;
+                case 2:
+                    foodItem.setFoodCategory(FoodCategory.MAIN_COURSE);
+                    break;
+                case 3:
+                    foodItem.setFoodCategory(FoodCategory.JUICE);
+                    break;
+                case 4:
+                    foodItem.setFoodCategory(FoodCategory.ICE_CREAM);
+                    break;
+            }
+        }
 }

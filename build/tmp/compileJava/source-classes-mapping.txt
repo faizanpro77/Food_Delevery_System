@@ -3,7 +3,7 @@ com/bridgelabz/FoodItem.java
  com.bridgelabz.FoodItem
  com.bridgelabz.FoodType
  com.bridgelabz.Taste
-com/bridgelabz/Application.java
- com.bridgelabz.Application
 com/bridgelabz/FoodStore.java
  com.bridgelabz.FoodStore
+com/bridgelabz/Application.java
+ com.bridgelabz.Application
