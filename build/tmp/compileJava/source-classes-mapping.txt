@@ -5,5 +5,13 @@ com/bridgelabz/FoodItem.java
  com.bridgelabz.Taste
 com/bridgelabz/FoodStore.java
  com.bridgelabz.FoodStore
+com/bridgelabz/Order.java
+ com.bridgelabz.Order
+ com.bridgelabz.Order$OrderStatus
+ com.bridgelabz.Order$PaymentStatus
+com/bridgelabz/Customer.java
+ com.bridgelabz.Customer
 com/bridgelabz/Application.java
  com.bridgelabz.Application
+com/bridgelabz/OrderManager.java
+ com.bridgelabz.OrderManager

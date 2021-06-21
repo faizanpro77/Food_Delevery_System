@@ -24,7 +24,8 @@ public class Application {
                 System.out.println("6.TO PRINT ALL ITEMS");
                 System.out.println("7.TO PRINT ALL DELIVERED ITEMS");
                 System.out.println("8.ENTER A FOOD ITEM TO DELETE");
-                System.out.println("9.TO EXIT");
+                System.out.println("9. ADD ORDER");
+                System.out.println("10.TO EXIT");
                 System.out.println("ENTER YOUR CHOICE");
                 Scanner scanner = new Scanner(System.in);
                 int choice = scanner.nextInt();
@@ -54,7 +55,13 @@ public class Application {
                         String deleteItemFromMenu = scanner.next();
                         foodStore.deleteItem(deleteItemFromMenu);
                         break;
+
                     case 9:
+                        OrderManager orderManager = new OrderManager();
+                        orderManager.placeOrder();
+                        break;
+
+                    case 10:
                         i = 1;
                         break;
                     default:
@@ -100,7 +107,7 @@ public class Application {
     }
 
     public void setFoodTaste() {
-        FoodItem foodItem = new FoodItem();
+       // FoodItem foodItem = new FoodItem();
         System.out.println("Enter the Taste");
         System.out.println("1.SWEET");
         System.out.println("2.LESS_SPICY");
