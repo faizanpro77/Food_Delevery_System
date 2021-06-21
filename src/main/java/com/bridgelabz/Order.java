@@ -4,7 +4,7 @@ package com.bridgelabz;
 import java.util.HashMap;
 import java.util.Map;
 
-//Pojo class(Plane old java object)
+//Pojo class
 public class Order {
 
     enum OrderStatus {
